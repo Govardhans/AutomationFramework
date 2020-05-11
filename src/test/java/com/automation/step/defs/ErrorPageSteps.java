@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Selenide.open;
 
 import com.automation.object.repository.ErrorPage;
 import com.automation.object.repository.UserPage;
-import com.automation.scenario.context.ScenarioContext;
 import com.codeborne.selenide.Condition;
 
 import cucumber.api.java.en.Then;

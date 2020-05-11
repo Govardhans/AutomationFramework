@@ -6,23 +6,22 @@
 #When: Some key actions
 #Then: To observe outcomes or validation
 @frontend
-Feature: Frontend Test Cases
+Feature: user CURD
   USER CURD test cases
 
   @T0001
   Scenario Outline: T0001 - Test create user functionality - frontend
     Given frontend is accessible
     When navigate to user page
-    Then user should landed on USER_PAGE
+    Then user page should be displayed
     And click on create user button
     Then create new user page should be displayed
     When create new user using below details
       | firstName   | lastName   | email   | newsletter   |
       | <firstName> | <lastName> | <email> | <newsletter> |
-    Then user should landed on USER_PAGE
-    And new user should be added in user table at last row. save user details in to "GUI_USER_DETAILS"
-    #And verify that user details on user page should be same as details provided in create user step
-    And verify that "GUI_USER_DETAILS" are same as details provided in create user step
+    Then user page should be displayed
+    And new user should be added in user table at last row
+    And verify that user details on user page should be same as details provided in create user step
 
     Examples: 
       | firstName | lastName | email         | newsletter |
@@ -32,14 +31,14 @@ Feature: Frontend Test Cases
   Scenario Outline: T0002 - emails are unique within the system and should return an error if already used
     Given frontend is accessible
     When navigate to user page
-    Then user should landed on USER_PAGE
+    Then user page should be displayed
     And click on create user button
     Then create new user page should be displayed
     When create new user using below details
       | firstName   | lastName   | email   | newsletter   |
       | <firstName> | <lastName> | <email> | <newsletter> |
-    Then user should landed on USER_PAGE
-    And new user should be added in user table at last row. save user details in to "GUI_USER_DETAILS"
+    Then user page should be displayed
+    And new user should be added in user table at last row
     When click on create user button
     And create new user using below details
       | firstName   | lastName   | email              | newsletter   |
@@ -54,7 +53,7 @@ Feature: Frontend Test Cases
   Scenario Outline: T0003 - emails have to be valid and properly formatted
     Given frontend is accessible
     When navigate to user page
-    Then user should landed on USER_PAGE
+    Then user page should be displayed
     And click on create user button
     Then create new user page should be displayed
     When create new user using below details
@@ -73,7 +72,7 @@ Feature: Frontend Test Cases
   Scenario Outline: T0004 - Delete user functionality
     Given frontend is accessible
     When navigate to user page
-    Then user should landed on USER_PAGE
+    Then user page should be displayed
     And click on create user button
     Then create new user page should be displayed
     When create new user using below details
@@ -92,7 +91,7 @@ Feature: Frontend Test Cases
   Scenario Outline: T0005 - Delete user functionality
     Given frontend is accessible
     When navigate to user page
-    Then user should landed on USER_PAGE
+    Then user page should be displayed
     When delete user by
       | email   |
       | <email> |

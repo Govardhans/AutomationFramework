@@ -1,17 +1,9 @@
-package com.automation.api.request.data;
+package com.automation.api.request.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-/**<p>
- * <code>DeleteUserQueryVariable</code> is used to create delete user payload
- * </p>
- * @author Govi
- *
- */
-
-public class DeleteUserQueryVariable implements QueryVariables {
+public class DeleteUserData implements Variables {
 
 	@SerializedName("uuid")
 	@Expose

@@ -1,5 +1,0 @@
-package com.automation.scenario.context;
-
-public enum Context {
-	USER_INPUT_DATA, CREATED_USER_RESPONSE, UPDATED_USER_RESPONSE, UPDATED_USER_DATA, RETRIEVE_USER, USERS, DELETE_USER_RESPONSE;
-}

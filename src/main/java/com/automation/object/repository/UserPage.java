@@ -14,7 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.automation.model.User;
+import com.automation.api.pojo.User;
+import com.automation.api.request.pojo.CreateUserInput;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -36,10 +37,6 @@ public class UserPage extends BasePage implements Page {
 		userOverviewTable = $(By.xpath("//user-table/table"));
 	}
 
-	/**
-	 * <p>returns last user from user table</p>
-	 * @return
-	 */
 	public Map<String, String> getLastUser() {
 		ElementsCollection header = userOverviewTable.$$(By.xpath("thead/tr/th"));
 		ElementsCollection rows = userOverviewTable.$$(By.xpath("tbody/tr"));
@@ -52,10 +49,6 @@ public class UserPage extends BasePage implements Page {
 		return userMap;
 	}
 
-	/**
-	 * <p>returns users from userTable
-	 * @return
-	 */
 	public List<User> getUsers() {
 		ElementsCollection header = userOverviewTable.$$(By.xpath("thead/tr/th"));
 		ElementsCollection rows = userOverviewTable.$$(By.xpath("tbody/tr"));
@@ -92,12 +85,7 @@ public class UserPage extends BasePage implements Page {
 		return userOverviewTable;
 	}
 
-	/**
-	 * <p>removes user from user table </p>
-	 * @param input
-	 * @return
-	 */
-	public boolean deleteUser(User input) {
+	public boolean deleteUser(CreateUserInput input) {
 		logger.info("Get users by email ID :: {} ", input.getEmail());
 		SelenideElement user = getUserby(EMAIL, input.getEmail());
 		
@@ -117,12 +105,6 @@ public class UserPage extends BasePage implements Page {
 		return true;
 	}
 
-	/**
-	 * <p>returns user by column</p>
-	 * @param headerName
-	 * @param value
-	 * @return
-	 */
 	public SelenideElement getUserby(String headerName, String value) {
 		ElementsCollection header = userOverviewTable.$$(By.xpath("thead/tr/th"));
 		int index = indexOf(header, headerName);		
@@ -136,12 +118,6 @@ public class UserPage extends BasePage implements Page {
 		return null;
 	}
 
-	/**
-	 * <p>returns integer index of header</p>
-	 * @param header
-	 * @param headerName
-	 * @return
-	 */
 	public int indexOf(ElementsCollection header, String headerName) {
 		logger.info("Finding index of {} in user table", headerName);
 		for (int i = 0; i < header.size(); i++) {

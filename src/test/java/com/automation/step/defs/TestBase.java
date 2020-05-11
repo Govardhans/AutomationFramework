@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.automation.scenario.context.ScenarioContext;
-
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -26,9 +24,7 @@ import cucumber.api.java.Before;
 public class TestBase {
 
 	private static Logger logger = LoggerFactory.getLogger(TestBase.class);
-	public static int testCounter = 0;
-	public static Scenario scenario;
-
+	ApplicationContext context = new AnnotationConfigApplicationContext();
 	private ScenarioContext scenarioContext;
 
 	public TestBase(ScenarioContext context) {
@@ -37,9 +33,8 @@ public class TestBase {
 
 	@Before
 	public void init(Scenario scenario) {
-		TestBase.scenario = scenario;
 		logger.info("\n\n");
-		logger.info("---------------------- Test {} Started -----------------------", ++testCounter);
+		logger.info("---------------------- Test {} Started -----------------------", ++ScenarioContext.testCounter);
 	}
 
 	@After
