@@ -1,0 +1,194 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "required": [
+        "data"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "data": {
+            "$id": "#/properties/data",
+            "type": "object",
+            "title": "The data schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [
+                {
+                    "createUser": {
+                        "user": {
+                            "email": "ueopslyuasdfsadfdj@xcnt.com",
+                            "createdAt": "2020-05-09T12:45:55.674987",
+                            "lastModifiedAt": null,
+                            "newsletter": true,
+                            "firstName": "Govardhan",
+                            "lastName": "Sanap",
+                            "uuid": "d7f1cb0d-0a79-4303-878d-6d896bdcf7fa"
+                        },
+                        "ok": true,
+                        "error": null
+                    }
+                }
+            ],
+            "required": [
+                "createUser"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "createUser": {
+                    "$id": "#/properties/data/properties/createUser",
+                    "type": "object",
+                    "title": "The createUser schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "user": {
+                                "lastName": "Sanap",
+                                "uuid": "d7f1cb0d-0a79-4303-878d-6d896bdcf7fa",
+                                "email": "ueopslyuasdfsadfdj@xcnt.com",
+                                "createdAt": "2020-05-09T12:45:55.674987",
+                                "lastModifiedAt": null,
+                                "firstName": "Govardhan",
+                                "newsletter": true
+                            },
+                            "ok": true,
+                            "error": null
+                        }
+                    ],
+                    "required": [
+                        "ok",
+                        "error",
+                        "user"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "ok": {
+                            "$id": "#/properties/data/properties/createUser/properties/ok",
+                            "type": "boolean",
+                            "title": "The ok schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": false,
+                            "examples": [
+                                true
+                            ]
+                        },
+                        "error": {
+                            "$id": "#/properties/data/properties/createUser/properties/error",
+                            "type": "null",
+                            "title": "The error schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": null,
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "user": {
+                            "$id": "#/properties/data/properties/createUser/properties/user",
+                            "type": "object",
+                            "title": "The user schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "lastName": "Sanap",
+                                    "uuid": "d7f1cb0d-0a79-4303-878d-6d896bdcf7fa",
+                                    "email": "ueopslyuasdfsadfdj@xcnt.com",
+                                    "createdAt": "2020-05-09T12:45:55.674987",
+                                    "lastModifiedAt": null,
+                                    "firstName": "Govardhan",
+                                    "newsletter": true
+                                }
+                            ],
+                            "required": [
+                                "uuid",
+                                "email",
+                                "firstName",
+                                "lastName",
+                                "newsletter",
+                                "createdAt",
+                                "lastModifiedAt"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                                "uuid": {
+                                    "$id": "#/properties/data/properties/createUser/properties/user/properties/uuid",
+                                    "type": "string",
+                                    "title": "The uuid schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "d7f1cb0d-0a79-4303-878d-6d896bdcf7fa"
+                                    ]
+                                },
+                                "email": {
+                                    "$id": "#/properties/data/properties/createUser/properties/user/properties/email",
+                                    "type": "string",
+                                    "title": "The email schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "ueopslyuasdfsadfdj@xcnt.com"
+                                    ]
+                                },
+                                "firstName": {
+                                    "$id": "#/properties/data/properties/createUser/properties/user/properties/firstName",
+                                    "type": "string",
+                                    "title": "The firstName schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "Govardhan"
+                                    ]
+                                },
+                                "lastName": {
+                                    "$id": "#/properties/data/properties/createUser/properties/user/properties/lastName",
+                                    "type": "string",
+                                    "title": "The lastName schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "Sanap"
+                                    ]
+                                },
+                                "newsletter": {
+                                    "$id": "#/properties/data/properties/createUser/properties/user/properties/newsletter",
+                                    "type": "boolean",
+                                    "title": "The newsletter schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": false,
+                                    "examples": [
+                                        true
+                                    ]
+                                },
+                                "createdAt": {
+                                    "$id": "#/properties/data/properties/createUser/properties/user/properties/createdAt",
+                                    "type": "string",
+                                    "title": "The createdAt schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": "",
+                                    "examples": [
+                                        "2020-05-09T12:45:55.674987"
+                                    ]
+                                },
+                                "lastModifiedAt": {
+                                    "$id": "#/properties/data/properties/createUser/properties/user/properties/lastModifiedAt",
+                                    "type": "null",
+                                    "title": "The lastModifiedAt schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": null,
+                                    "examples": [
+                                        null
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,5 +1,5 @@
 @frontend
-Feature: Error Page
+Feature: Error Page test cases
   Error Page test cases
 
   @T0001
@@ -9,7 +9,7 @@ Feature: Error Page
     Then error page should displayed msg "It seems like we couldn't find the page you were looking for"
     And verify home button is present on error page
     When click on home page button
-    Then user page should be displayed
+    Then user should landed on USER_PAGE
 
     Examples: 
       | firstName | lastName | email         | newsletter |
