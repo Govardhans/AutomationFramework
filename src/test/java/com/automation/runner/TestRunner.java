@@ -34,7 +34,8 @@ import io.restassured.RestAssured;
 		snippets = SnippetType.CAMELCASE,
 		plugin = {
 					"json:target/json-cucumber-reports/cukejson.json", 
-					"html:target/cucumber-report/1.html", "pretty" 
+					"html:target/cucumber-report/1.html", "pretty", 
+					"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"					
 				 })
 
 /**
@@ -42,9 +43,9 @@ import io.restassured.RestAssured;
  * @author Govardhan
  *
  */
-public class RunnerTest {
+public class TestRunner {
 
-	public static Logger logger = LoggerFactory.getLogger(RunnerTest.class);	
+	public static Logger logger = LoggerFactory.getLogger(TestRunner.class);	
 	
 	/**
 	 * Selenide rule for taking screenshots
@@ -56,7 +57,7 @@ public class RunnerTest {
 	@BeforeClass
 	public static void setUp() {
 					
-		SpringApplication.run(RunnerTest.class, new String[] {});		
+		SpringApplication.run(TestRunner.class, new String[] {});		
 		String testEnv = System.getProperty("env", "qa"); 
 		String browser = System.getProperty("browser", "");
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());

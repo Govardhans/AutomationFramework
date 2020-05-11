@@ -6,6 +6,11 @@ import org.openqa.selenium.By;
 
 import com.codeborne.selenide.SelenideElement;
 
+/**
+ * 
+ * @author Govi
+ *
+ */
 public class BasePage implements Page{
 
 	private SelenideElement toolbarImage;
