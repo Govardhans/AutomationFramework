@@ -12,12 +12,10 @@ import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.automation.api.request.pojo.CreateUserInput;
 import com.automation.helper.Utils;
-import com.automation.model.User;
 import com.automation.object.repository.CreateUserPage;
 import com.automation.object.repository.UserPage;
-import com.automation.scenario.context.Context;
-import com.automation.scenario.context.ScenarioContext;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,13 +34,13 @@ import io.cucumber.datatable.DataTable;
 public class UserPageSteps {
 	private static Logger logger = LoggerFactory.getLogger(UserPageSteps.class);
 //	private ScenarioContext scenarioContext;
-	ScenarioContext scenarioContext;
+	ScenarioContext state;
 	UserPage userPage = new UserPage();
 	CreateUserPage createUserPage = new CreateUserPage();
 
-	public UserPageSteps(ScenarioContext scenarioContext) {
-		// this.scenarioContext = scenarioContext;
-		this.scenarioContext = scenarioContext;
+	public UserPageSteps(ScenarioContext state) {
+		//this.scenarioContext = scenarioContext;
+		this.state = state;
 	}
 
 	@Given("frontend is accessible")
@@ -55,7 +53,7 @@ public class UserPageSteps {
 		open("/user");
 	}
 
-	@Then("user should landed on USER_PAGE")
+	@Then("user page should be displayed")
 	public void userPageShouldBeDisplayed() {
 		Assert.assertTrue("User didn't navigat to user page", userPage.getCreateUserButton().exists());
 	}
@@ -74,24 +72,23 @@ public class UserPageSteps {
 	public void createNewUserUsingBelowDetails(DataTable dataTable) throws InterruptedException {
 		List<Map<String, String>> userDetails = dataTable.asMaps();
 		ObjectMapper mapper = new ObjectMapper();
-		List<User> userDataInputs = new ArrayList<>();
+		List<CreateUserInput> userDataInputs = new ArrayList<>();
 
 		for (Map<String, String> userMap : userDetails) {
-			User input = mapper.convertValue(userMap, User.class);
+			CreateUserInput input = mapper.convertValue(userMap, CreateUserInput.class);
 			input.setEmail(getEmail(input.getEmail()));
 			// store user data into context
 			createUserPage.getFirstName().setValue(input.getFirstName());
 			createUserPage.getLastName().setValue(input.getLastName());
 			createUserPage.getEmail().setValue(input.getEmail());
-			if (input.isNewsletter()) {
+			if (input.getNewsletter()) {
 				createUserPage.getNewsletterCheckBox().click();
 			}
 
 			userDataInputs.add(input);
 			createUserPage.getSubmitButton().click();
 		}
-
-		scenarioContext.setContext(Context.USER_INPUT_DATA, userDataInputs);
+		state.userDataInputs =  userDataInputs;
 	}
 
 	@Then("Error message {string} should popup")
@@ -105,43 +102,37 @@ public class UserPageSteps {
 		createUserPage.getEmailError().should(Condition.text(errorMsg));
 	}
 
-	@SuppressWarnings("unchecked")
 	public String getEmail(String input) {
 		String output = input;
 		if (StringUtils.equals(input, "$random_email")) {
 			return Utils.getRandomString(10) + "@xnt.com";
 		} else if (StringUtils.equals(input, "$prv_user_email_id")) {
-			List<User> inputList = (List<User>) scenarioContext.getContext(Context.USER_INPUT_DATA);
+			List<CreateUserInput> inputList = state.userDataInputs;
 			return inputList.get(0).getEmail();
 		}
 		return output;
 	}
 
-	@Then("new user should be added in user table at last row. save user details in to {string}")
-	public void newUserShouldBeAddedInUserTableAtLastRow(String saveUserDetails) {
+	@Then("new user should be added in user table at last row")
+	public void newUserShouldBeAddedInUserTableAtLastRow() {
 		Map<String, String> lastUser = userPage.getLastUser();
-
-		scenarioContext.setContext(saveUserDetails, lastUser);
+		state.lastUser = lastUser;
 		logger.info("Added User details are :: {} ", lastUser.toString());
 	}
 
 	@SuppressWarnings("unchecked")
-//	@Then("verify that user details on user page should be same as details provided in create user step")
-	@Then("verify that {string} are same as details provided in create user step")
-	public void verifyThatUserDetails(String userDetails) {
+	@Then("verify that user details on user page should be same as details provided in create user step")
+	public void verifyThatUserDetails() {
+		List<CreateUserInput> providedData = state.userDataInputs;
+		providedData.get(0);
 
-		List<User> providedData = (List<User>) scenarioContext.getContext(Context.USER_INPUT_DATA);
-		Assert.assertNotNull("User input data is null", providedData);
-
-		Map<String, String> webPageData = (Map<String, String>) scenarioContext.getContext(userDetails);
-		Assert.assertNotNull("User data from page is not in context", webPageData);
+		Map<String, String> webPageData = state.lastUser;
 
 		List<String> expectedResult = new LinkedList<>();
-
 		expectedResult.add(providedData.get(0).getEmail());
 		expectedResult.add(providedData.get(0).getFirstName());
 		expectedResult.add(providedData.get(0).getLastName());
-		expectedResult.add(providedData.get(0).isNewsletter() ? "done" : "clear");
+		expectedResult.add(providedData.get(0).getNewsletter() ? "done" : "clear");
 
 		// clear done
 
@@ -162,7 +153,7 @@ public class UserPageSteps {
 		List<Map<String, String>> userDetails = dataTable.asMaps();
 		ObjectMapper mapper = new ObjectMapper();
 		for (Map<String, String> userMap : userDetails) {
-			User input = mapper.convertValue(userMap, User.class);
+			CreateUserInput input = mapper.convertValue(userMap, CreateUserInput.class);
 			input.setEmail(getEmail(input.getEmail()));
 
 			logger.info("Delete user :: {} ", input.toString());

@@ -13,16 +13,15 @@ Feature: user End to End Test
   Scenario Outline: T0001 - Creaet User from fontend and check details are updated in backend
     Given frontend is accessible
     When navigate to user page
-    Then user should landed on USER_PAGE
+    Then user page should be displayed
     And click on create user button
     Then create new user page should be displayed
     When create new user using below details
       | firstName   | lastName   | email   | newsletter   |
       | <firstName> | <lastName> | <email> | <newsletter> |
-    Then user should landed on USER_PAGE
-    And new user should be added in user table at last row. save user details in to "GUI_USER_DETAILS" 
-    #And verify that user details on user page should be same as details provided in create user step
-    And verify that "GUI_USER_DETAILS" are same as details provided in create user step
+    Then user page should be displayed
+    And new user should be added in user table at last row
+    And verify that user details on user page should be same as details provided in create user step
     When retrieve user using query "query{ users { uuid, email, firstName, lastName, newsletter, createdAt, lastModifiedAt }}" and email "$prv_user_email_id"
     Then verify frontend and backend user details
 
